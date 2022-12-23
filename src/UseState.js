@@ -1,7 +1,7 @@
 import React from "react";
 
 function UseState({ name }) {
-  const [error, setError] = React.useState(true);
+  const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
