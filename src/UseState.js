@@ -12,10 +12,11 @@ function UseState({ name }) {
     console.log("empezando el efecto!");
 
     if (loading) {
-      setError(false);
       setTimeout(() => {
         console.log("Haciendo validación!");
-        if (value !== SECURITY_CODE) {
+        if (value === SECURITY_CODE) {
+          // setError(true);
+        } else {
           setError(true);
         }
         setLoading(false);
@@ -32,16 +33,25 @@ function UseState({ name }) {
       <h2>Eliminar {name}</h2>
       <p>Escribe el código de seguridad</p>
 
+      {/* {(error && !loading) && <p>Hubo un error, papalindo</p>} */}
       {error && <p>Hubo un error, papalindo</p>}
       {loading && <p>Cargando, papalindo</p>}
       <input
         value={value}
         onChange={(event) => {
           setValue(event.target.value);
+          // setError(false) se llama muchas veces al cambio de estado!
         }}
         placeholder="Código de seguridad"
       />
-      <button onClick={() => setLoading(true)}>Comprobar</button>
+      <button
+        onClick={() => {
+          setError(false); // Es correcto
+          setLoading(true);
+        }}
+      >
+        Comprobar
+      </button>
     </div>
   );
 }
